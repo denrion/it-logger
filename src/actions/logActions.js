@@ -4,6 +4,7 @@ import {
   DELETE_LOG,
   GET_LOGS,
   LOGS_ERROR,
+  SEARCH_LOGS,
   SET_CURRENT,
   SET_LOADING,
   UPDATE_LOG
@@ -23,6 +24,7 @@ export const getLogs = () => async dispatch => {
   }
 };
 
+// Add log to server
 export const addLog = log => async dispatch => {
   try {
     setLoading();
@@ -72,6 +74,20 @@ export const updateLog = log => async dispatch => {
     const data = await res.json();
 
     dispatch({ type: UPDATE_LOG, payload: data });
+  } catch (err) {
+    dispatch({ type: LOGS_ERROR, payload: err.response.data });
+  }
+};
+
+// Search logs
+export const searchLogs = text => async dispatch => {
+  try {
+    setLoading();
+
+    const res = await fetch(`/logs?q=${text}`);
+    const data = await res.json();
+
+    dispatch({ type: SEARCH_LOGS, payload: data });
   } catch (err) {
     dispatch({ type: LOGS_ERROR, payload: err.response.data });
   }
