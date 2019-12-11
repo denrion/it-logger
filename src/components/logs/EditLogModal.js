@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { updateLog } from '../../actions/logActions';
+import TechSelectOptions from '../techs/TechSelectOptions';
 
 const EditLogModal = ({ current, updateLog }) => {
   const [message, setMessage] = useState('');
@@ -71,9 +72,7 @@ const EditLogModal = ({ current, updateLog }) => {
               <option value='' disabled>
                 Select Technician
               </option>
-              <option value='John Doe'>John Doe</option>
-              <option value='Sam Smith'>Sam Smith</option>
-              <option value='Sara Wilson'>Sara Wilson</option>
+              <TechSelectOptions />
             </select>
           </div>
         </div>
